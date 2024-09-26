@@ -1,7 +1,10 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+./sistema_livraria/__pycache__/
 *.py[cod]
 *$py.class
+
+myenv/
 
 # C extensions
 *.so
@@ -124,6 +127,9 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.myenv
+myenv
+myenv/
 env/
 venv/
 ENV/
