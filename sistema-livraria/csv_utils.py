@@ -1,30 +1,23 @@
 import csv
-import sqlite3
-from pathlib import Path
+from db import sessao_db
+from constantes import EXPORTS_DIR, DB_PATH
 
-db_path = Path('./data/livraria.db')
-exports_dir = Path('./exports')
-
-def exportar_para_csv():
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
+@sessao_db
+def exportar_para_csv(cursor):
     cursor.execute('SELECT * FROM livros')
     livros = cursor.fetchall()
     
-    csv_path = exports_dir / 'livros_exportados.csv'
+    csv_path = EXPORTS_DIR / 'livros_exportados.csv'
     
     with open(csv_path, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['ID', 'Título', 'Autor', 'Ano de Publicação', 'Preço'])
         writer.writerows(livros)
     
-    conn.close()
     print(f'Dados exportados para {csv_path}')
 
-def importar_de_csv(csv_path):
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-
+@sessao_db
+def importar_de_csv(cursor, csv_path):
     with open(csv_path, 'r', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
@@ -34,6 +27,4 @@ def importar_de_csv(csv_path):
                 VALUES (?, ?, ?, ?, ?)
             ''', (row[0], row[1], row[2], row[3], row[4]))
     
-    conn.commit()
-    conn.close()
     print(f'Dados importados de {csv_path}')

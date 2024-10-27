@@ -4,7 +4,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-myenv/
+# Diretórios estruturais do projeto
+backups/
+data/
+exports/
+
+# Ambientes virtuais
+*env/
 
 # C extensions
 *.so
