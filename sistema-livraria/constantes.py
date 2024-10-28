@@ -1,11 +1,14 @@
 from pathlib import Path
 
-DATA_DIR = Path('./data')
-BACKUPS_DIR = Path('./backups')
-EXPORTS_DIR = Path('./exports')
-DB_PATH = Path('./data/livraria.db')
+# Armazena o caminho absoluto para a pasta do projeto (sistema-livraria)
+PROJETO_PATH = Path(__file__).resolve().parent
 
-STRING_OPCOES = '''
+DATA_DIR = PROJETO_PATH / "data"
+BACKUPS_DIR = PROJETO_PATH / "backups"
+EXPORTS_DIR = PROJETO_PATH / "exports"
+DB_PATH = DATA_DIR / "livraria.db"
+
+STRING_OPCOES = """
         1. Adicionar novo livro
         2. Exibir todos os livros
         3. Atualizar preço de um livro
@@ -15,4 +18,4 @@ STRING_OPCOES = '''
         7. Importar dados de CSV
         8. Fazer backup do banco de dados
         9. Sair
-        '''
+        """

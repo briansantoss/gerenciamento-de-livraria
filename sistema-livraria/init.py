@@ -1,5 +1,5 @@
 from constantes import DATA_DIR, BACKUPS_DIR, EXPORTS_DIR
-from db import sessao_db
+from db_utils import sessao_db
 
 def criar_estrutura():
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -8,7 +8,7 @@ def criar_estrutura():
 
 @sessao_db
 def criar_db(cursor):
-    cursor.execute('''
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS livros (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             titulo TEXT NOT NULL,
@@ -16,4 +16,4 @@ def criar_db(cursor):
             ano_publicacao INTEGER NOT NULL,
             preco REAL NOT NULL
         )
-    ''')
+    """)
